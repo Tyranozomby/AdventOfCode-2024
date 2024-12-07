@@ -21,4 +21,4 @@ fun aoc(day: Int, block: (String) -> Any?) {
 operator fun Pair<Int, Int>.plus(other: Pair<Int, Int>) = Pair(first + other.first, second + other.second)
 operator fun Pair<Int, Int>.minus(other: Pair<Int, Int>) = Pair(first - other.first, second - other.second)
 operator fun Pair<Int, Int>.times(other: Int) = Pair(first * other, second * other)
-fun Pair<Int, Int>.inv() = Pair(-second, first)
+fun Pair<Int, Int>.rot() = Pair(-second, first)
