@@ -18,7 +18,19 @@ fun aoc(day: Int, block: (String) -> Any?) {
     }
 }
 
-operator fun Pair<Int, Int>.plus(other: Pair<Int, Int>) = Pair(first + other.first, second + other.second)
-operator fun Pair<Int, Int>.minus(other: Pair<Int, Int>) = Pair(first - other.first, second - other.second)
-operator fun Pair<Int, Int>.times(other: Int) = Pair(first * other, second * other)
-fun Pair<Int, Int>.rot() = Pair(-second, first)
+@Suppress("MemberVisibilityCanBePrivate")
+data class Coord(val x: Int, val y: Int) {
+    constructor(pair: Pair<Int, Int>) : this(pair.first, pair.second)
+
+    operator fun plus(other: Pair<Int, Int>) = Coord(x + other.first, y + other.second)
+    operator fun plus(other: Coord) = Coord(x + other.x, y + other.y)
+
+    operator fun minus(other: Coord) = Coord(x - other.x, y - other.y)
+    operator fun minus(other: Pair<Int, Int>) = Coord(x - other.first, y - other.second)
+
+    operator fun times(other: Int) = Coord(x * other, y * other)
+
+    fun rot() = Coord(-y, x)
+
+    override fun toString() = "($x, $y)"
+}

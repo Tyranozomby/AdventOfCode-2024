@@ -1,5 +1,5 @@
 fun main() = aoc(6) { input ->
-    val coords = input.lines().mapIndexed { y, line -> line.mapIndexed { x, c -> (x to y) to c } }.flatten().toMap()
+    val coords = input.lines().mapIndexed { y, line -> line.mapIndexed { x, c -> Coord(x, y) to c } }.flatten().toMap()
     val start = coords.filterValues { it == '^' }.keys.first()
 
     loop(coords, start).let { steps ->
@@ -11,10 +11,10 @@ fun main() = aoc(6) { input ->
     }
 }
 
-fun loop(coords: Map<Pair<Int, Int>, Char>, start: Pair<Int, Int>): Pair<Set<Pair<Int, Int>>, Boolean> {
+fun loop(coords: Map<Coord, Char>, start: Coord): Pair<Set<Coord>, Boolean> {
     var position = start
-    var direction = Pair(0, -1)
-    val steps: MutableSet<Pair<Pair<Int, Int>, Pair<Int, Int>>> = mutableSetOf()
+    var direction = Coord(0, -1)
+    val steps: MutableSet<Pair<Coord, Coord>> = mutableSetOf()
 
     while (position in coords && (position to direction) !in steps) {
         steps.add(position to direction)
