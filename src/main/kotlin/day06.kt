@@ -4,9 +4,7 @@ fun main() = aoc(6) { input ->
 
     loop(coords, start).let { steps ->
         steps.first.size to steps.first.fold(0) { sum2, obs ->
-            val newCoords = coords.toMutableMap()
-            newCoords[obs] = '#'
-            return@fold sum2 + if (loop(newCoords, start).second) 1 else 0
+            sum2 + if (loop(coords.toMutableMap().apply { this[obs] = '#' }, start).second) 1 else 0
         }
     }
 }
