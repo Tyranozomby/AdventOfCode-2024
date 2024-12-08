@@ -1,4 +1,5 @@
 import java.io.File
+import kotlin.math.abs
 
 fun getText(fileName: String): String = File("src/main/resources/$fileName").readText()
 
@@ -31,6 +32,7 @@ data class Coord(val x: Int, val y: Int) {
     operator fun times(other: Int) = Coord(x * other, y * other)
 
     fun rot() = Coord(-y, x)
+    fun distanceTo(other: Coord) = abs(x - other.x) + abs(y - other.y)
 
     override fun toString() = "($x, $y)"
 }
